@@ -8,7 +8,8 @@
 
 import UIKit
 
-public protocol CalendarDateRangePickerViewControllerDelegate: class {
+@objc
+public protocol CalendarDateRangePickerViewControllerDelegate: NSObject {
     func didCancelPickingDateRange()
     func didPickDateRange(startDate: Date!, endDate: Date!)
     func didSelectStartDate(startDate: Date!)
