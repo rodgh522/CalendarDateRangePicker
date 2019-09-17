@@ -21,7 +21,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc let cellReuseIdentifier = "CalendarDateRangePickerCell"
     @objc let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
     
-    weak public var delegate: CalendarDateRangePickerViewControllerDelegate!
+    @objc weak public var delegate: CalendarDateRangePickerViewControllerDelegate!
     
     @objc let itemsPerRow = 7
     @objc let itemHeight: CGFloat = 40
