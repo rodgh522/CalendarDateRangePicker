@@ -8,7 +8,8 @@
 
 import UIKit
 
-public protocol CalendarDateRangePickerViewControllerDelegate: class {
+@objc
+public protocol CalendarDateRangePickerViewControllerDelegate {
     func didCancelPickingDateRange()
     func didPickDateRange(startDate: Date!, endDate: Date!)
     func didSelectStartDate(startDate: Date!)
@@ -20,7 +21,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc let cellReuseIdentifier = "CalendarDateRangePickerCell"
     @objc let headerReuseIdentifier = "CalendarDateRangePickerHeaderView"
     
-    weak public var delegate: CalendarDateRangePickerViewControllerDelegate!
+    @objc weak public var delegate: CalendarDateRangePickerViewControllerDelegate!
     
     @objc let itemsPerRow = 7
     @objc let itemHeight: CGFloat = 40
@@ -41,13 +42,12 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc public static let defaultHeaderFontSize:CGFloat = 17.0
     @objc public var cellFont:UIFont = UIFont(name: "HelveticaNeue", size: CalendarDateRangePickerViewController.defaultCellFontSize)!
     @objc public var headerFont:UIFont = UIFont(name: "HelveticaNeue-Light", size: CalendarDateRangePickerViewController.defaultHeaderFontSize)!
-
+    
     
     @objc public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
     @objc public var selectedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     @objc public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     @objc public var titleText = "Select Dates"
-
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -123,12 +123,12 @@ extension CalendarDateRangePickerViewController {
             let date = getDate(dayOfMonth: dayOfMonth, section: indexPath.section)
             cell.date = date
             cell.label.text = "\(dayOfMonth)"
-
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let datePreFormatted = dateFormatter.string(from: date)
             let dateFormatted = dateFormatter.date(from: datePreFormatted)
-         
+            
             if disabledDates != nil{
                 if (disabledDates?.contains(cell.date!))!{
                     cell.disable()
@@ -277,8 +277,8 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
     }
     
     public func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+                               layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding = collectionViewInsets.left + collectionViewInsets.right
         let availableWidth = view.frame.width - padding
         let itemWidth = availableWidth / CGFloat(itemsPerRow)
@@ -364,7 +364,7 @@ extension CalendarDateRangePickerViewController {
         var section = startDateCellIndex.section
         var currentIndexPath: IndexPath
         var cell: CalendarDateRangePickerCell?
-
+        
         while !(index == endDateCellIndex.row && section == endDateCellIndex.section){
             currentIndexPath = IndexPath(row: index, section: section)
             cell = collectionView?.cellForItem(at: currentIndexPath) as? CalendarDateRangePickerCell
