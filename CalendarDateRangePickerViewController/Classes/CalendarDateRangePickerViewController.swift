@@ -262,7 +262,7 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
         }
         
         if calenderSelectionStyle == "SINGLE" {
-            print("Single Date Selection");
+            print("Single Date Selection.");
             selectedStartDate = cell.date
             selectedStartCell = indexPath
             self.navigationItem.rightBarButtonItem?.isEnabled = true
