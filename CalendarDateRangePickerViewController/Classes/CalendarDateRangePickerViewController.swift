@@ -48,8 +48,8 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     @objc public var selectedColor = UIColor(red: 66/255.0, green: 150/255.0, blue: 240/255.0, alpha: 1.0)
     @objc public var selectedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
     @objc public var highlightedLabelColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
-    @objc public var titleText = "Select Dates"
-    @objc public var calenderSelectionStyle = "Range"
+    @objc public var titleText = "Select Date(s)"
+    @objc public var calenderSelectionStyle = "RANGE"
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(CalendarDateRangePickerViewController.didTapCancel))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(CalendarDateRangePickerViewController.didTapDone))
-        if calenderSelectionStyle == "Single"{
+        if calenderSelectionStyle == "SINGLE"{
             self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil
         } else {
             self.navigationItem.rightBarButtonItem?.isEnabled = selectedStartDate != nil && selectedEndDate != nil
@@ -85,7 +85,7 @@ public class CalendarDateRangePickerViewController: UICollectionViewController {
     }
     
     @objc func didTapDone() {
-        if calenderSelectionStyle == "Single" {
+        if calenderSelectionStyle == "SINGLE" {
             delegate.didPickSingleDate(startDate: selectedStartDate)
         }
         if selectedStartDate == nil || selectedEndDate == nil {
@@ -261,10 +261,11 @@ extension CalendarDateRangePickerViewController : UICollectionViewDelegateFlowLa
             }
         }
         
-        if calenderSelectionStyle == "Single" {
+        if calenderSelectionStyle == "SINGLE" {
             print("Selection");
             selectedStartDate = cell.date
             selectedStartCell = indexPath
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
             delegate.didSelectStartDate(startDate: selectedStartDate)
             selectedEndDate = nil
         } else {
