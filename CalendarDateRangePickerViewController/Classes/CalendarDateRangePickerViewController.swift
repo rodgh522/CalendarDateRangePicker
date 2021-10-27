@@ -333,7 +333,7 @@ extension CalendarDateRangePickerViewController {
     
     @objc func getMonthLabel(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM yyyy"
+        dateFormatter.dateFormat = "yyyy년 M월"
         return dateFormatter.string(from: date)
     }
     
